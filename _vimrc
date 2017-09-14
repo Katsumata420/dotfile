@@ -12,10 +12,10 @@ set textwidth=0
 set cursorline
 set title
 set smartindent
-set wrap
+"set wrap
 "normalだったり行頭、行末
-inoremap jj <Esc>   
-inoremap <C-e> <Esc>$a
+inoremap jj <Esc>
+inoremap <C-e> <Esc>$i
 inoremap <C-a> <Esc>^a
 "検索が真ん中に来る
 nnoremap n nzz
@@ -36,3 +36,26 @@ set clipboard+=unnamed
 nnoremap <C-o> : <C-u>setlocal cursorcolumn!<CR>
 "set list
 
+"プラグイン用
+if has('vim_starting')
+   "初回起動時のみruntimepathにneobundleのパスを指定する
+   "set runtimepath+=~/.vim/bundle/neobundle.vim/
+   set runtimepath+=~/dotfile/vimfiles/neobundle.git/neobundle.vim/
+endif
+
+"NeoBundleを初期化
+"call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/dotfile/vimfiles/neobundle.git/'))
+
+" インストールするプラグインをここに記述
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/neocomplete.vim'
+
+call neobundle#end()
+
+"ファイルタイプ別のプラグイン/インデントを有効にする
+filetype plugin indent on
+
+"tree
+nnoremap :tree :NERDTreeToggle
